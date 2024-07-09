@@ -1,0 +1,52 @@
+name: Build nightly Catalyst releases for TestPyPI
+
+on:
+  schedule:
+    - cron: "22 40 * * 1-5"
+  workflow_dispatch:
+
+jobs:
+  setup:
+    name: Setup the release
+    steps:
+    - name: Version bump
+      run: |
+        python .github/workflows/set_nightly_version.py
+        git add $GITHUB_WORKSPACE/frontend/catalyst/_version.py
+        git commit -m "bump nightly version"
+        git push
+
+  linux-x86:
+    name: Build on Linux x86-64
+    needs: [setup]
+    uses: ./.github/workflows/build-wheel-linux-x86_64.yaml
+
+  # linux-aarch:
+  #   name: Build on Linux aarch64
+  #   needs: [setup]
+  #   uses: ./.github/workflows/build-wheel-linux-arm64.yaml
+
+  # macos-arm:
+  #   name: Build on macOS arm64
+  #   needs: [setup]
+  #   uses: ./.github/workflows/build-wheel-macos-arm64.yaml
+
+  macos-x86:
+    name: Build on macOS x86-64
+    needs: [setup]
+    uses: ./.github/workflows/build-wheel-macos-x86_64.yaml
+
+  prep-wheels:
+    name: Prepare wheels for upload
+    needs: [linux-x86, linux-aarch, macos-arm, macos-x86]
+
+    steps:
+    - name: Download wheels
+      uses: actions/download-artifact@v4
+      with:
+        merge-multiple: true
+    - run: ls -al
+
+  # upload:
+  #   name: Upload all wheels to TestPyPI
+  #   needs: [prep-wheels]

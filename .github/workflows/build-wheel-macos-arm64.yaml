@@ -1,14 +1,6 @@
 name: Build Catalyst Wheel on macOS (arm64)
 
 on:
-  pull_request:
-    types:
-      - opened
-      - reopened
-      - synchronize
-      - labeled
-  push:
-    branches: [ main ]
   workflow_dispatch:
 
 env:
