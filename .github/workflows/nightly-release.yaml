@@ -19,8 +19,8 @@ jobs:
 
     - name: Push new version
       run: |
-        git config --global user.email "catalyst_bot@xanadu.ai"
-        git config --global user.name "Version Bump Bot"
+        git config --global user.email "dime10@users.noreply.github.com"
+        git config --global user.name "dime10"
         git add $GITHUB_WORKSPACE/frontend/catalyst/_version.py
         git commit -m "bump nightly version"
         git push
