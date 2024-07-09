@@ -28,7 +28,7 @@ jobs:
     # uses: ./.github/workflows/build-wheel-linux-arm64.yaml
     runs-on: ubuntu-latest
     steps:
-    - runs: echo "hello"
+    - run: echo "hello"
 
   macos-arm:
     name: Build on macOS arm64
@@ -36,7 +36,7 @@ jobs:
     # uses: ./.github/workflows/build-wheel-macos-arm64.yaml
     runs-on: ubuntu-latest
     steps:
-    - runs: echo "hello"
+    - run: echo "hello"
 
   macos-x86:
     name: Build on macOS x86-64
