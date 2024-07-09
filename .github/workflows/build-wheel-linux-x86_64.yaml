@@ -5,7 +5,7 @@ on:
   workflow_call:
 
 concurrency:
-  group: 'Build Catalyst Wheel on Linux (x86_64)'-${{ github.ref }}
+  group: Build Catalyst Wheel on Linux (x86_64)-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
