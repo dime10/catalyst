@@ -12,7 +12,8 @@ jobs:
     steps:
     - name: Checkout Catalyst repo
       uses: actions/checkout@v4
-      token: ${{ secrets.BOT_PAT }}
+      with:
+        token: ${{ secrets.BOT_PAT }}
 
     - name: Version bump
       run: |
