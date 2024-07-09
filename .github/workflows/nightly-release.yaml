@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Version bump
       run: |
-        python .github/workflows/set_nightly_version.py
+        python $GITHUB_WORKSPACE/.github/workflows/set_nightly_version.py
         git add $GITHUB_WORKSPACE/frontend/catalyst/_version.py
         git commit -m "bump nightly version"
         git push
