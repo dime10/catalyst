@@ -7,7 +7,7 @@ env:
   MACOSX_DEPLOYMENT_TARGET: 14.0
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: 'Build Catalyst Wheel on macOS (arm64)'-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
