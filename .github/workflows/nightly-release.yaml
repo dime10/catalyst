@@ -10,6 +10,9 @@ jobs:
     name: Setup the release
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout Catalyst repo
+      uses: actions/checkout@v4
+
     - name: Version bump
       run: |
         python $GITHUB_WORKSPACE/.github/workflows/set_nightly_version.py
