@@ -53,8 +53,8 @@ jobs:
     needs: [setup]
     uses: ./.github/workflows/build-wheel-macos-x86_64.yaml
 
-  prep-wheels:
-    name: Prepare wheels for upload
+  upload:
+    name: Prepare & Upload wheels to TestPyPI
     needs: [linux-x86, linux-aarch, macos-arm, macos-x86]
     runs-on: ubuntu-latest
 
@@ -63,8 +63,18 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         merge-multiple: true
-    - run: ls -al
+        path: dist
 
-  # upload:
-  #   name: Upload all wheels to TestPyPI
-  #   needs: [prep-wheels]
+    - name: Prepare wheels
+      run: |
+        rename "s/linux/manylinux_2_28/" dist/PennyLane_Catalyst-*
+        rename "s/macosx_14/macosx_13/" dist/PennyLane_Catalyst-*
+        rename "s/_universal2/_x86_64/" dist/PennyLane_Catalyst-*
+
+    - name: Upload wheels
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+        repository-url: https://test.pypi.org/legacy/
+        packages-dir: dist
