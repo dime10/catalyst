@@ -67,6 +67,7 @@ jobs:
 
     - name: Prepare wheels
       run: |
+        sudo apt install rename
         rename "s/linux/manylinux_2_28/" dist/PennyLane_Catalyst-*
         rename "s/macosx_14/macosx_13/" dist/PennyLane_Catalyst-*
         rename "s/_universal2/_x86_64/" dist/PennyLane_Catalyst-*
