@@ -67,6 +67,7 @@ jobs:
       run: |
         mkdir wheel
         touch wheel/PennyLane_Catalyst-0.8.0.dev0-cp${{ matrix.python_version }}-cp${{ matrix.python_version }}-linux_x86_64.whl
+        echo "hello" >> wheel/PennyLane_Catalyst-0.8.0.dev0-cp${{ matrix.python_version }}-cp${{ matrix.python_version }}-linux_x86_64.whl
 
     - name: Upload Wheel Artifact
       uses: actions/upload-artifact@v3
